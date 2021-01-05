@@ -1,0 +1,24 @@
+.header {
+  margin-bottom: 1em;
+  margin-top: 1em;
+}
+
+.product-list {
+  border: 1px solid #dee2e6;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
+  background-color: #e2dfdf;
+  padding: 1em;
+  z-index: 1;
+}
+
+.product {
+  margin: 0.5em;
+  background-color: #8080802e;
+  z-index: 2;
+  padding-bottom: 1em;
+}
+
+.load-button {
+  bottom-margin: 0.5em;
+}

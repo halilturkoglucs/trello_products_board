@@ -1,0 +1,10 @@
+.customer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(5em, 11em));
+  background-color: white;
+  border-bottom: 1px solid black;
+  margin-bottom: 1em;
+  padding-top: 1em;
+  justify-content: center;
+  align-content: center;
+}
