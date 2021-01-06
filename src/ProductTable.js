@@ -43,7 +43,17 @@ export class ProductTable extends Component {
   }
 
   renderCustomerList(product) {
-    let customerList = product.customerList.map(customer => (
+    let customerList = product.customerList;
+    let searchText = this.props.searchedOrHighlightedText;
+
+    // If in Search mode, then filter out the customers not having the search text
+    if (searchText && (this.props.searchHighlightSwitch === "2" || this.props.searchHighlightSwitch === "3")) {
+      customerList = customerList.filter(customer => {
+        return this.searchCustomer(customer, this.props.searchedOrHighlightedText)
+      });
+    }
+
+    customerList = product.customerList.map(customer => (
       <div className="customer" key={customer.id}>
         <div>
           <Image className="customer--avatar"
@@ -144,21 +154,27 @@ export class ProductTable extends Component {
 
       if (!searchedText) return true;
 
-      //
-
       return product.name.toLowerCase().includes(searchedText.toLowerCase()) ||
-        (product.customerList && product.customerList.find(customer => {
-        return customer.name.toLowerCase().includes(searchedText.toLowerCase()) ||
-          (customer.job &&
-            (customer.job.title.toLowerCase().includes(searchedText.toLowerCase()) ||
-              customer.job.company.toLowerCase().includes(searchedText.toLowerCase()))
-          ) ||
-          (customer.quote && customer.quote.toLowerCase().includes(searchedText.toLowerCase()));
-
-      }));
+        this.searchCustomers(product.customerList, searchedText);
     } else {
       return true
     }
+  }
+
+  searchCustomers(customers, searchedText) {
+    return customers && customers.find(customer => {
+        return this.searchCustomer(customer, searchedText);
+      }
+    );
+  }
+
+  searchCustomer(customer, searchedText) {
+    return customer.name.toLowerCase().includes(searchedText.toLowerCase()) ||
+      (customer.job &&
+        (customer.job.title.toLowerCase().includes(searchedText.toLowerCase()) ||
+          customer.job.company.toLowerCase().includes(searchedText.toLowerCase()))
+      ) ||
+      (customer.quote && customer.quote.toLowerCase().includes(searchedText.toLowerCase()));
   }
 
   render() {

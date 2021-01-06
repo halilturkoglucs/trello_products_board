@@ -32,6 +32,6 @@ export function searchOrHighlight(text) {
   return {type: SEARCH_OR_HIGHLIGT_TEXT, payload: text};
 };
 
-export function setSearchMode(text) {
-  return {type: SET_SEARCH_MODE, payload: text}
+export function setSearchMode(mode) {
+  return {type: SET_SEARCH_MODE, payload: mode}
 }
