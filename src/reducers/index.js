@@ -1,8 +1,9 @@
-import {LOAD_PRODUCTS, LOAD_CUSTOMER, SEARCH_OR_HIGHLIGT_TEXT} from "../constants/action-types";
+import {LOAD_PRODUCTS, LOAD_CUSTOMER, SEARCH_OR_HIGHLIGT_TEXT, SET_SEARCH_MODE} from "../constants/action-types";
 
 const initialState = {
   products: [],
-  searchedOrHighlightedText: ''
+  searchedOrHighlightedText: '',
+  searchHighlightSwitch: 0 // 0:none, 1: highlight, 2: search, 3: both
 };
 
 function rootReducer(state = initialState, action) {
@@ -45,9 +46,14 @@ function rootReducer(state = initialState, action) {
   }
 
   if (action.type === SEARCH_OR_HIGHLIGT_TEXT) {
-    // If the selected mode is s
     return Object.assign({}, state, {
       searchedOrHighlightedText: action.payload
+    });
+  }
+
+  if (action.type === SET_SEARCH_MODE) {
+    return Object.assign({}, state, {
+      searchHighlightSwitch: action.payload
     });
   }
 

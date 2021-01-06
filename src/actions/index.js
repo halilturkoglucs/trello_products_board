@@ -1,4 +1,4 @@
-import {LOAD_CUSTOMER, LOAD_PRODUCTS, SEARCH_OR_HIGHLIGT_TEXT} from "../constants/action-types";
+import {LOAD_CUSTOMER, LOAD_PRODUCTS, SEARCH_OR_HIGHLIGT_TEXT, SET_SEARCH_MODE} from "../constants/action-types";
 
 export function loadProducts() {
   return function (dispatch) {
@@ -31,3 +31,7 @@ export function loadCustomersForProduct(product, offset, limit) {
 export function searchOrHighlight(text) {
   return {type: SEARCH_OR_HIGHLIGT_TEXT, payload: text};
 };
+
+export function setSearchMode(text) {
+  return {type: SET_SEARCH_MODE, payload: text}
+}
